@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MemberController;
+use App\Mail\SampleMail;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +26,8 @@ $data="hi,Let Learn Larvel";
 //       ->camel($data);
 // echo $data;
 Route::get('/', function () {
-    return view('welcome');
+    //return view('welcome');
+    return new SampleMail();
 });
 // // Route::get('/{name}', function ($name) {
 // //     echo $name;
