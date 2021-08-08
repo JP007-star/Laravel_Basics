@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\ListController;
 use App\Mail\SampleMail;
 
 /*
@@ -87,3 +88,4 @@ Route::get('edituser/{id}',[UserController::class,'edituser']);
 Route::get('DBOperation',[UserController::class,'DBOperation']);
 Route::get('usershow',[MemberController::class,'index']);
 Route::get('device/{key:Name}',[MemberController::class,'device']);
+Route::get('list',[ListController::class,'list']);

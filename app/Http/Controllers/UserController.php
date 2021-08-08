@@ -150,7 +150,7 @@ class UserController extends Controller
     public function usershow()
     {
         return User::find(34)->getCompany;
-    }
+    } 
    
      
 }
