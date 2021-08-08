@@ -68,5 +68,9 @@ class APIController extends Controller
             return "Oops something went wrong";
         }
     }
+    public function search($name)
+    {
+        return Member::where("Name","like","%".$name."%")->get();
+    }
     
 }
