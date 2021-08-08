@@ -21,3 +21,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get("getdata",[APIController::class,'getdata']);
 Route::post("add_data",[APIController::class,'add_data']);
+Route::put("update_data",[APIController::class,'update_data']);
+Route::delete("delete_data/{id}",[APIController::class,'delete_data']);

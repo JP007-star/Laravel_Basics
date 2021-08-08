@@ -34,5 +34,39 @@ class APIController extends Controller
         // 	"Age":21
         // }
     }
+    public function update_data( Request $req)
+    {
+        $data=Member::find($req->id);
+        $data->Name=$req->Name;
+        $data->Age=$req->Age;
+        $result=$data->save();
+        if($result)
+        {
+            return "Data Updated Succesfully";
+        }
+        else
+        {
+            return "Oops something went wrong";
+        }
+        //Sample test json for api
+        // {
+        // 	"Name":"JayaPrasad",
+        // 	"Age":21,
+        //  "id":3
+        // }
+    }
+    public function delete_data($id)
+    {
+        $data=Member::find($id);
+        $result=$data->delete();
+        if($result)
+        {
+            return "Data Deleted Succesfully";
+        }
+        else
+        {
+            return "Oops something went wrong";
+        }
+    }
     
 }
