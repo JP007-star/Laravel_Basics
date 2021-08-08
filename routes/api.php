@@ -20,3 +20,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get("getdata",[APIController::class,'getdata']);
+Route::post("add_data",[APIController::class,'add_data']);

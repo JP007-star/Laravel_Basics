@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Http;
 use App\Models\Member;
 class MemberController extends Controller
 {
+     public $timestamps=false;
    public function index()
     {
         return Member::find(1)->getDevice;
