@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Member;
+use Validator;
 
 class APIController extends Controller
 {
@@ -14,7 +15,16 @@ class APIController extends Controller
     }
     public function add_data(Request $req)
     {
-       
+        $rules=array(
+            "Name"=>"required",
+            "Age"=>"required"
+        );
+        $result=Validator::make($req->all(),$rules);
+        if($result->fails())
+        {
+            return response()->json($result->errors());
+        }
+        else{
         $data=New Member;
         $data->Name=$req->Name;
         $data->Age=$req->Age;
@@ -27,6 +37,7 @@ class APIController extends Controller
         {
             return "Oops something went wrong";
         }
+     }
         
         //Sample test json for api
         // {
