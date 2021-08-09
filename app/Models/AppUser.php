@@ -2,18 +2,30 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Model;
 
 
 
-
-class User extends Authenticatable
+class AppUser extends Model
 {
-    use HasApiTokens,HasFactory, Notifiable;
+    
+    public $table="mUsers";
+    public $timestamps=false;
+    //accessor in laravel
+    public function getNameAttribute($value)
+    {
+        return ucFirst($value);
+    }
+    // mutator
+    public function setNameAttribute($value)
+    {
+       $this->attributes['Name']="Mr".$value;
+    }
+    public function getCompany()
+    { 
+        return $this->hasOne(Company::class,'foreign_key');
+    }
 
     /**
      * The attributes that are mass assignable.

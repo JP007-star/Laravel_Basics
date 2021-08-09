@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\AppUserController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\ListController;
 use App\Mail\SampleMail;
@@ -38,17 +38,17 @@ Route::get('/', function () {
 //     return view('welcome');
 //     //return redirect('about');
 // });
-// // Route::get('user','User@index');
-// // Route::get('user/{name}',[UserController::class,'index']);
-// Route::get('users',[UserController::class,'index']);
-// Route::get('about',[UserController::class,'loadview']);
-// Route::get('fetchdata',[UserController::class,'fetchdata']);
-// Route::get('apidata',[UserController::class,'apidata']);
+// // Route::get('user','AppUser@index');
+// Route::get('user/{name}',[AppUserController::class,'index']);
+Route::get('users',[AppUserController::class,'index']);
+// Route::get('about',[AppUserController::class,'loadview']);
+// Route::get('fetchdata',[AppUserController::class,'fetchdata']);
+// Route::get('apidata',[AppUserController::class,'apidata']);
 
-// Route::put('GetData',[UserController::class,'GetData']);
-// Route::post('/uploadform',[UserController::class,'uploadform']);
-// Route::post('userinsert',[UserController::class,'userinsert']);
-// Route::post('deleteuser/{id}',[UserController::class,'deleteuser']);
+// Route::put('GetData',[AppUserController::class,'GetData']);
+// Route::post('/uploadform',[AppUserController::class,'uploadform']);
+// Route::post('userinsert',[AppUserController::class,'userinsert']);
+// Route::post('deleteuser/{id}',[AppUserController::class,'deleteuser']);
 
 // Route::view('noaccess','noaccess');
 // Route::view('upload','upload');
@@ -79,13 +79,13 @@ Route::get('/', function () {
 // // Route::view('home','home');
 // // });
 
-Route::get('add',[UserController::class,'add']);
-Route::any('/userinsert',[UserController::class,'userinsert']);
-Route::post('/userupdate',[UserController::class,'userupdate']);
-Route::get('list',[UserController::class,'List']);
-Route::get('deleteuser/{id}',[UserController::class,'deleteuser']);
-Route::get('edituser/{id}',[UserController::class,'edituser']);
-Route::get('DBOperation',[UserController::class,'DBOperation']);
+Route::get('add',[AppUserController::class,'add']);
+Route::any('/userinsert',[AppUserController::class,'userinsert']);
+Route::post('/userupdate',[AppUserController::class,'userupdate']);
+Route::get('list',[AppUserController::class,'List']);
+Route::get('deleteuser/{id}',[AppUserController::class,'deleteuser']);
+Route::get('editAppUser/{id}',[AppUserController::class,'edituser']);
+Route::get('DBOperation',[AppUserController::class,'DBOperation']);
 Route::get('usershow',[MemberController::class,'index']);
 Route::get('device/{key:Name}',[MemberController::class,'device']);
 Route::get('list',[ListController::class,'list']);

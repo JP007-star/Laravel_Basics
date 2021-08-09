@@ -3,154 +3,99 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Http;
 use App\Models\User;
-
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    public function index()
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    function index(Request $request)
     {
+        $user= User::where('email', $request->email)->first();
+        // print_r($data);
+            if (!$user || !Hash::check($request->password, $user->password)) {
+                return response([
+                    'message' => ['These credentials do not match our records.']
+                ], 404);
+            }
         
-        return DB::select("select * from user_records");
-    }
-    public function loadview()
-    {
-       $data=["jp","divya","prasad"];
-        return view("about",['names'=>$data]); 
-    }
-    public function fetchdata()
-    {
-       
-        $data=User::paginate(2); 
-        return view("home",['datas'=>$data]); 
-    }
-     public function GetData(Request $req)
-    {
-        $req->validate([
-            'username' => 'required',
-            'userpassword' => 'required | min:5',
-        ]);
-        $data=$req->input();
-        $req->session()->put('user',$data['username']);
-        $Data=Http::get("https://reqres.in/api/users?page=2");
-        return view('usertable',['content'=>$Data['data']]);
-    }
-    function userinsert(Request $req)
-    {
-        $req->validate([
-            'username' => 'required',
-            'age' => 'integer|min:18',
-            'class' => 'required',
-        ]);
-    
-         if(!empty($req->Id)) 
-         {
-            $user['Name']=$req->username;
-            $user['Age']=$req->age;
-            $user['Class']=$req->class;
-            User::where("Id",$req->Id)->update($user);
-         }  
-         else
-         {
-            $user=new User;
-            $user->Name=$req->username;
-            $user->Age=$req->age;
-            $user->Class=$req->class;
-            $user->save();
-         }
-        return redirect('list'); 
-    }
-    function apidata()
-    {
-        $Data=Http::get("https://reqres.in/api/users?page=2");
-        return view('usertable',['content'=>$Data['data']]);
-    }
-    function uploadform(Request $req)
-    {
-       return $req->file('file')->store('docs');
-    }
-    function deleteuser($id)
-    {
+             $token = $user->createToken('my-app-token')->plainTextToken;
         
-         $data = User::where('id',$id)->delete();
-         return redirect('list');
-       
-    }
-    function edituser($id)
-    {
-        $data=User::find($id);
-        return view('addmember',['datas'=>$data]);
-    }
-    function List()
-    {
-        $data=User::all();
-        $data=User::paginate(5); 
-        return view('list',['datas'=>$data]);
-    }
-    function add()
-    {
-       $data="";
-       return view('addmember',['datas'=>$data]);
-    }
-    function DBOperation()
-    {
-    //    return  DB::table('musers')
-    //    ->where('Id',33)
-    //    ->get();
-
-    // return  (array)DB::table('musers')
-    // ->find(33);
-
-    //  return  DB::table('musers')
-    // ->count();
-
-    //   $user=[
-    //       'Name'=>'Jp',
-    //       'Age'=>9,
-    //       'Class'=>'A',
-    //   ];
-    //   return  DB::table('musers')
-    //     ->insert($user);
-
-    //  $user=[
-    //       'Name'=>'Jp',
-    //       'Age'=>9,
-    //       'Class'=>'A',
-    //   ];
-    //   return  DB::table('musers')
-    //     ->where('Id',33)
-    //     ->update($user);
-
-    // return  DB::table('musers')
-    //     ->where('Id',33)
-    //     ->delete();
-
-    //  return  DB::table('musers')
-    //     ->avg('id');
-    //  return  DB::table('musers')
-    //     ->sum('id');
-    //  return  DB::table('musers')
-    //     ->count('id');
-    // return  DB::table('musers')
-    //     ->max('id');
-    // return  DB::table('musers')
-    //     ->min('Name');
-
-     return  DB::table('musers')
-        ->join('muserdetails','musers.Id',"=","muserdetails.Id")
-        ->select('muserdetails.*')
-        ->get();
-
-
-
+            $response = [
+                'user' => $user,
+                'token' => $token
+            ];
+        
+             return response($response, 201);
     }
 
-    public function usershow()
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
     {
-        return User::find(34)->getCompany;
-    } 
-   
-     
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
+    }
 }
