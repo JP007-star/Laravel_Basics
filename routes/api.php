@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\APIController;
 use App\Http\Controllers\APIResource;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\FileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,3 +35,5 @@ Route::group(['middleware' => 'auth:sanctum'], function(){
 Route::apiResource('apiresponse',APIResource::class);
     });
 Route::post("login",[UserController::class,'index']);
+
+Route::post("upload",[FileController::class,'upload']);
