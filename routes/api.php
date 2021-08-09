@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\APIController;
+use App\Http\Controllers\APIResource;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,3 +25,5 @@ Route::post("add_data",[APIController::class,'add_data']);
 Route::put("update_data",[APIController::class,'update_data']);
 Route::delete("delete_data/{id}",[APIController::class,'delete_data']);
 Route::get("search/{name}",[APIController::class,'search']);
+Route::apiResource('apiresponse',APIResource::class);
+Route::post('apiresponsestore',[APIResource::class,'store']);
